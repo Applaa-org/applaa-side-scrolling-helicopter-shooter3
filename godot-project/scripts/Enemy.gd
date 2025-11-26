@@ -4,6 +4,7 @@ class_name Enemy
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var health_bar: ProgressBar = $HealthBar
+@onready var weapon_point: Marker2D = $WeaponPoint
 
 var health: int = 30
 var max_health: int = 30
@@ -40,7 +41,7 @@ func _update_behavior(delta: float):
 func shoot():
 	var bullet = preload("res://scenes/EnemyBullet.tscn").instantiate()
 	get_parent().add_child(bullet)
-	bullet.global_position = $WeaponPoint.global_position
+	bullet.global_position = weapon_point.global_position
 	bullet.rotation = rotation
 	
 	can_shoot = false

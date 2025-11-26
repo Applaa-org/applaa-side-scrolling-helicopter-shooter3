@@ -865,7 +865,7 @@
         
         function spawnPowerUp(x, y) {
             const types = Object.keys(powerUpTypes);
-            const type = types[Math.floor(Math.random() * types.length)];
+            const type = types[Math.floor(Math.random() % types.length)];
             const powerUpData = powerUpTypes[type];
             
             powerUps.push({
@@ -882,9 +882,7 @@
         function collectPowerUp(powerUp) {
             switch (powerUp.type) {
                 case 'health':
-                    player.health = Math.min(player.max
-
-Health, player.health + powerUp.value);
+                    player.health = Math.min(player.maxHealth, player.health + powerUp.value);
                     break;
                 case 'shield':
                     player.shield = Math.min(100, player.shield + powerUp.value);
