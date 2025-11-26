@@ -1,0 +1,49 @@
+{
+  "game": {
+    "name": "Side-Scrolling Helicopter Shooter",
+    "type": "2D",
+    "genre": "shooter",
+    "description": "A side-scrolling helicopter shooter inspired by Jetpack Joyride and Metal Slug"
+  },
+  "settings": {
+    "window": {"width": 1024, "height": 600},
+    "physics": {"gravity": 500},
+    "scroll_speed": 150
+  },
+  "player": {
+    "name": "Combat Helicopter",
+    "health": 100,
+    "armor": 50,
+    "speed": 300,
+    "weapons": ["minigun", "rocket", "spread"],
+    "abilities": ["shield", "airstrike"]
+  },
+  "entities": {
+    "enemies": [
+      {"name": "Drone", "health": 20, "speed": 100, "damage": 10, "behavior": "patrol"},
+      {"name": "Tank", "health": 50, "speed": 50, "damage": 20, "behavior": "stationary"},
+      {"name": "Turret", "health": 30, "speed": 0, "damage": 15, "behavior": "aim"},
+      {"name": "EnemyChopper", "health": 40, "speed": 120, "damage": 15, "behavior": "chase"}
+    ],
+    "collectibles": [
+      {"name": "Coin", "value": 10},
+      {"name": "Fuel", "value": 20},
+      {"name": "Health", "value": 25},
+      {"name": "Shield", "value": 30}
+    ]
+  },
+  "levels": [
+    {"name": "Base Camp", "theme": "military", "difficulty": 1},
+    {"name": "Desert Warzone", "theme": "desert", "difficulty": 2},
+    {"name": "Volcano Lava Run", "theme": "volcano", "difficulty": 3}
+  ],
+  "logic": {
+    "winCondition": "reach_end",
+    "loseCondition": "health_zero",
+    "scoring": {
+      "pointsPerKill": 100,
+      "pointsPerCollectible": 10,
+      "pointsPerLevel": 1000
+    }
+  }
+}

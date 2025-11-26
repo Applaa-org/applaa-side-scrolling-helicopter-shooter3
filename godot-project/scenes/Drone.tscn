@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://d8n2vqy8n7qk3"]
+
+[ext_resource type="Script" path="res://scripts/Drone.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://e8n2vqy8n7qk3" path="res://assets/drone.png" id="2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(40, 30)
+
+[node name="Drone" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1")
+collision_layer = 2
+collision_mask = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="WeaponPoint" type="Marker2D" parent="."]
+position = Vector2(20, 0)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+position = Vector2(0, -25)
+size = Vector2(40, 4)
+max_value = 20.0
+value = 20.0
