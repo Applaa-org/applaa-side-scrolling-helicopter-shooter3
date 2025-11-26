@@ -15,7 +15,7 @@ func _ready():
 	close_button.pressed.connect(_on_close_pressed)
 	
 	# Hide next button if on last level
-	if Global.current_level >= 2:
+	if Global.current_level >= 9:
 		next_button.visible = false
 
 func _on_next_pressed():

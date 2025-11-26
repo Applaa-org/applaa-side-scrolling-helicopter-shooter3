@@ -29,8 +29,22 @@ func _physics_process(delta: float):
 	_update_behavior(delta)
 
 func _update_behavior(delta: float):
-	# Override in child classes
-	pass
+	# Basic patrol behavior
+	velocity.x = -speed
+	move_and_slide()
+	
+	# Enemy shooting
+	if can_shoot and randf() < 0.01:
+		shoot()
+
+func shoot():
+	var bullet = preload("res://scenes/EnemyBullet.tscn").instantiate()
+	get_parent().add_child(bullet)
+	bullet.global_position = $WeaponPoint.global_position
+	bullet.rotation = rotation
+	
+	can_shoot = false
+	current_shoot_time = shoot_cooldown
 
 func take_damage(damage: int):
 	health -= damage

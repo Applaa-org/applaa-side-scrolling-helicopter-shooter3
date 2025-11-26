@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8n2vqy8n7qk3"]
+
+[ext_resource type="Script" path="res://scripts/Collectible.gd" id="1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 15.0
+
+[node name="Collectible" type="Area2D" groups=["collectible"]]
+script = ExtResource("1")
+collision_layer = 8
+collision_mask = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color.YELLOW
+scale = Vector2(0.5, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

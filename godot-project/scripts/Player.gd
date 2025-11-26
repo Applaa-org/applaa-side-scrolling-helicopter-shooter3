@@ -4,8 +4,6 @@ class_name Player
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var weapon_point: Marker2D = $WeaponPoint
-@onready var shield_sprite: Sprite2D = $Shield
-@onready var engine_particles: CPUParticles2D = $EngineParticles
 
 const SPEED: float = 300.0
 const GRAVITY: float = 200.0
@@ -18,7 +16,6 @@ var current_shoot_time: float = 0.0
 func _ready():
 	Global.health_changed.connect(_on_health_changed)
 	Global.weapon_changed.connect(_on_weapon_changed)
-	shield_sprite.visible = false
 
 func _physics_process(delta: float):
 	# Apply gravity
@@ -37,11 +34,6 @@ func _physics_process(delta: float):
 		direction.x = -1
 	if Input.is_key_pressed(KEY_D) or Input.is_key_pressed(KEY_RIGHT):
 		direction.x = 1
-	
-	# Mobile controls (will be handled by UI)
-	if Global.is_mobile:
-		# Mobile input handled by MobileControls node
-		pass
 	
 	# Apply movement
 	if direction != Vector2.ZERO:
@@ -69,9 +61,6 @@ func _physics_process(delta: float):
 		current_shoot_time -= delta
 		if current_shoot_time <= 0:
 			can_shoot = true
-	
-	# Update engine particles
-	engine_particles.emitting = velocity.length() > 50
 
 func shoot():
 	if not can_shoot:
@@ -125,9 +114,6 @@ func _on_health_changed(new_health: int):
 		sprite.modulate = Color.ORANGE
 	else:
 		sprite.modulate = Color.WHITE
-	
-	# Update shield visibility
-	shield_sprite.visible = Global.player_shield > 0
 
 func _on_weapon_changed(weapon: String):
 	# Update weapon visuals
@@ -141,7 +127,3 @@ func _on_weapon_changed(weapon: String):
 
 func take_damage(damage: int):
 	Global.take_damage(damage)
-	# Screen shake effect
-	var tween = create_tween()
-	tween.tween_property(self, "position", position + Vector2(randf_range(-5, 5), randf_range(-5, 5)), 0.1)
-	tween.tween_property(self, "position", position, 0.1)
